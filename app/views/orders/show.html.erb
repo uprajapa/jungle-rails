@@ -2,12 +2,28 @@
 
   <header class="page-header">
     <h1>Order #<%= @order.id %></h1>
+
+    <%= @order.line_items[0].product.inspect %>
   </header>
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
-  </div>
+    <h4>Total amount: $<%= @order.total %></h4>
+    <h4>Associated email : <%= @order.email %></h4>
+    <% @order.line_items.each { |line_item| %>
+      <div class="card mb-4">
+        <%= image_tag line_item.product.image.url, alt: line_item.product.name, class: "img-thumbnail", width: "200", height: "200" %>
+      <div>
+        <h4 class="h4"><%= line_item.product.name %></h4>
+        <p><%= line_item.product.description %></p>
+      </div>
+      <div>
+        <p>Quantity: <%= line_item.quantity %></p>
+        <p>Total: <%= humanized_money_with_symbol line_item.total_price %></p>
+      </div>
+    <% } %>
+    </div>
 
-  <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+  <%= link_to "Continue Shopping", root_path, class: "btn btn-lg btn-primary" %>
 
 </section>
