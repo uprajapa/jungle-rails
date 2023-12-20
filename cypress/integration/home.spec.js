@@ -1,4 +1,4 @@
-describe('example to-do app', () => {
+describe('Home page', () => {
 
 
   it('visits the app home page', () => {
